@@ -1,0 +1,26 @@
+html{
+    margin: 0%;
+    padding: 0%;
+    font-size: 62.5%;
+}
+
+nav{
+    background-color: red;
+    height: 20rem;
+}
+
+li{
+    display:inline-block;
+    padding: 3rem;
+}
+
+ul{
+    display: inline-block;
+}
+
+a{
+    color: yellow;
+    font-size: 3rem;
+    text-decoration: none;
+}
+
