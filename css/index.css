@@ -5,7 +5,7 @@
 
 
 /*Definicion de variables para la normalización*/
-root{
+:root{ /*Pseudoclase de más alto nivel*/
     /*Palette*/
     --primary-solid: #FF3333;
     --primary-900: rgba(255, 51, 51, 0.9); /*El mismo de arriba, pero con 90% de transparencia*/
@@ -39,12 +39,14 @@ root{
     --font-large: 2.4em;
     --font-medium: 1.8em;
     --font-small: 1.6em;
-    --font-xsmall: 1.2em;
+    --font-xsmall: 1.4em;
 
     /*Spacings*/
     --spacing128: 12.8rem;
     --spacing68: 6.8rem;
     --spacing36: 3.6rem;
+    --spacing20: 2rem;
+    --spacing24: 2.4rem;
     --spacing28: 2.8rem;
     --spacing16: 1.6rem;
     --spacing12: 1.2rem;
@@ -55,7 +57,7 @@ root{
 
 *,
 *::before,
-*::after {
+*::after { 
     margin: 0%;
     padding: 0%;
     box-sizing: border-box; /*La caja NO crece al agregar paddings*/
@@ -64,17 +66,18 @@ root{
 html{ /*Es la etiqueta RAIZ, todos los elementos heredan de ella (sólo las propiedades heredables*/
     font-size: 62.5%; /*Hardcodeamos el valor x defecto de 16px y lo llevamos a 10px (más fácil)*/
     font-family: var(--base-font);
-    color: var(--dark-bg-solid); /*Color x defecto para TODO el sitio (es heredable)*/
+    color: var(--dark-solid); /*Color x defecto para TODO el sitio (es heredable)*/
 }
 
-a{
-    font-size: 2em;  /* 20px */
+a {
+    /* font-size: 2em;  /* 20px Lo saco para que no genere problemas con otros ANCHORs*/
     text-decoration: none;
     color: inherit; /*Aplica el color que viene "heredado", sobreescribiendo el asignado x el navegador*/
     font-family: inherit; /*Para que hereden "RALEWAY" los enlaces que están dentro de un Header o Footer.  Los demás enlaces heredarán "INTER"*/
 }
 
-header, footer {
+header, 
+footer {
     font-family: var(--alternative-font);
     color: var(--light-font-solid); /*Lo fijo en BLANCO, para que todo el contenido del HEADER y FOOTER, incluidos los enlaces, sean blanco (ya que tiene fondo oscuro).  Otros enlaces seguirán heredando a HTML (negro)*/
 
@@ -82,25 +85,81 @@ header, footer {
 
 ul, ol{
     list-style-type: none; /*Saca los números y los bullets*/
-    display: inline-block;
+    /*display: inline-block;*/
 }
 
 p{
     font-size: 1.8em; /* 18px */
 }
 
-nav{
-    /*background-color: red;*/
-    height: 10rem;
-}
+img {
+    width: 100%; /*Normalizamos TODOS los IMG, para que no generen overflow*/
+}   /*Siempre va a tener el 100% del ancho de su contenedor padre*/
 
-li{
-    display:inline-block;
-    padding: 3rem;
-}
-
-.container{
+.container{ /*Clase HELPER*/
     max-width: 1200px; /*Clase utilitaria para delimitar el ancho del cuerpo principal del sitio (sin los header ni footers*/
-    margin: 0, auto; /*Arriba y abajo es CERO.  El contenedor de 1200px es centrado automáticamente*/
+    margin: 0 auto; /*Arriba y abajo es CERO.  El contenedor de 1200px es centrado automáticamente*/
 }
 
+/*HEADER*/
+
+header {
+    background-color: var(--dark-bg-solid); /*Lo aplico al HEADER para que vaya de punta a punta de la pantalla*/
+    padding: var(--spacing36); /*Separo a su hijo (nav) de los bordes, pero respetando los 1200px de la clase container*/
+}
+
+.navbar {
+    display: flex; /*Para que los hijos se comporten de manera flexible*/
+    flex-direction: row; /*x defecto: Los hijos se alinean uno al lado del otro*/
+    justify-content: space-between; /*Coloca a los hijos separados x el maximo posible*/
+    align-items: center; /*Centra a sus hijos (Logo y Menu con carrito)*/
+}
+
+.navbar__logo {
+    max-width: 300px; /*Porque el LOGO me había quedado medio grande*/
+}
+
+.navbar__menu {
+    display: flex; /*(x defecto ROW) Los items del menu se ubican uno al lado del otro*/
+    align-items: center; /*Centra a sus hijos (carrito y menu)*/
+    gap: var(--spacing20); /*Separa los elementos del menu entre sí*/
+}
+
+.navbar__link {
+    font-size: var(--font-medium);   /*Ajusto el tamaño de letra de los items del menu*/
+    padding: var(--spacing8) var(--spacing16); /*Agrego relleno a cada item del menu, para que parezca un botón*/
+    display: inline-block; /*No es necesario, no afecta visualmente.  Sólo que así los paddings están en el flujo de la pagina*/
+    transition: background .3s ease-in-out; /*Lo pongo acá para que me lo haga cuando entro y cuando salgo.  Si lo pongo en el HOVER sólo lo hace cuando entra*/
+    position: relative; /*Sólo le hace efecto al submenu de SHOP*/
+}
+
+.navbar__link:hover {
+    background-color: var(--primary-900);
+}
+
+.with-icon { /*Clase HELPER para centrar iconos con otros elementos*/
+    display: flex;
+    align-items: center;
+    gap: var(--spacing8);
+}
+
+.with-submenu:hover .submenu {/*Le cambio el DISPLAY al .submenu SÖLO al hacer HOVER*/
+    display: block;
+}
+
+.submenu {
+    display: none; /*Nunca se ve.  Sólo cuando se hace HOVER al padre*/
+    position: absolute; /*Lo saco del flujo de la página*/
+    background-color: var(--dark-bg-solid);
+}
+
+.submenu__link {
+    display: block; /*Para poder darle tamaño a los elementos (normalmente los enlaces son INLINE)*/
+    padding: var(--spacing8) var(--spacing16); /*Separo los elementos del SUBMENU.  Arriba y abajo 8, derecha e izq 16*/
+    font-size: var(--font-medium);
+    transition: background .3s ease-in-out; /*Lo pongo acá para que me lo haga cuando entro y cuando salgo.  Si lo pongo en el HOVER sólo lo hace cuando entra*/
+}
+
+.submenu__link:hover {
+    background-color: var(--primary-900); /*Ajusto el HOVER del submenu, igual que el menu*/
+}

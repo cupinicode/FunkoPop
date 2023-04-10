@@ -11,22 +11,35 @@
 <body>
 
     <header>
-        <nav>
-            <picture> <!--Armo una etiqueta en bloque, para albergar a la imagen del LOGO y al enlace-->
+        <nav class="navbar container">
+            <picture class="navbar__logo"> <!--Armo una etiqueta en bloque, para albergar a la imagen del LOGO y al enlace-->
                 <a href="./index.html"> <!--El LOGO es el HOME-->
                     <img src="./assets/img/branding/logo_light_horizontal.svg" alt="Logo FunkoShop">
                 </a>
             </picture>
-            <ul>
-                <li><a href="./pages/shop.html">SHOP</a></li>
-                <li><a href="./pages/contacto.html">CONTACTO</a></li>
-                <li><a href="./pages/login.html">LOGIN</a></li>
-                <li><a href="./pages/carrito.html"><img src="./assets/img/icons/cart-icon.svg" alt="Icono de Carrito"></a></li>
+            <ul class="navbar__menu">
+                <li class="navbar__item with-submenu"> <!--Indico que va a tener SUBMENU-->
+                    <a class="navbar__link with-icon" href="./pages/shop.html">SHOP<iconify-icon icon="mdi:chevron-down"></iconify-icon></a> <!--Pequé el enlace del ICONO-->
+                    <ul class="submenu"> <!--Creo un SUBMENU para SHOP-->
+                        <li class="submenu__item">
+                            <a href="" class="submenu__link">Funkos</a>
+                        </li>
+                        <li class="submenu__item">
+                            <a href="" class="submenu__link">Remeras</a>
+                        </li>
+                        <li class="submenu__item">
+                            <a href="" class="submenu__link">Llaveros</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="navbar__item"><a class="navbar__link" href="./pages/contacto.html">CONTACTO</a></li>
+                <li class="navbar__item"><a class="navbar__link" href="./pages/login.html">LOGIN</a></li>
+                <li class="navbar__item"><a class="navbar__cart" href="./pages/carrito.html"><img src="./assets/img/icons/cart-icon.svg" alt="Icono de Carrito"></a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="container"> <!--Bloque Principal del Sitio--> <!--Uso la clase utilitaria "CONTAINER"-->
+    <main> <!--Bloque Principal del Sitio--> <!--Usaba la clase utilitaria "CONTAINER"-->
 
         <section> <!--Sección 1: BANNER (o HERO)-->
             <article>
@@ -140,6 +153,7 @@
         </section>
         <p>All rights reserved 2022 - Funkoshop &copy;</p>
     </footer>
-    
+    <!--Script de ICONIFY-->
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script> 
 </body>
 </html>
