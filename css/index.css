@@ -163,3 +163,64 @@ header {
 .submenu__link:hover {
     background-color: var(--primary-900); /*Ajusto el HOVER del submenu, igual que el menu*/
 }
+
+/*HERO o BANNER*/
+
+.hero {
+    background-image: url("../assets/img/funkos-banner.webp"); /*x defecto, la altura la va a dar los elementos que haya adentro*/
+    background-position: top; /*Fue necesario agregarlo, porque el BEFORE no llegaba hasta el final de la imagen*/
+    padding: var(--spacing128); /*Agrega relleno al contenedor (aleja los elementos de los bordes*/
+    background-size: cover; /*Evita que se repita la imagen (porque es mas chica que el contenedor)*/
+    background-attachment: fixed; /*Fija la imagen (si hago SCROLL no se mueve)*/
+/*  filter: blur(4px); /*blurea la imagen (y también el texto y el botón).  Por eso no lo uso*/
+    position: relative; /*El hijo es absoluto*/
+}
+
+.hero::before { /*Pseudoclase.  Vamos a colocar una capa nueva entre el fondo y el texto*/
+    content: ""; /*No necesito el contenido, sólo el blureado*/
+    background-color: rgba(0, 0, 0, 0); /*Creo la nueva capa, pero no me interesa cambiar el color, sólo el blureo*/
+    width: 100%; /*Todo el ancho del contenedor*/
+    height: 100%;/*Todo el alto del contenedor*/
+    position: absolute; /*El padre es relativo*/
+    top: 0; /*Lo ubico en el extremo superior de su contenedor*/
+    left: 0; /*Lo ubico en el extremo izquierdo de su contenedor*/
+    backdrop-filter: blur(2px) brightness(0.9); /*es como la propiedad FILTER, pero aplciada al BEFORE
+      Aplico los filtros deseados a ESTA CAPA INTERMEDIA.  Sólo me falta ubicarla con el z-index*/
+    
+}
+
+.hero__content { /*contenedor de los elementos del banner*/
+    display: flex; /*Contenedor flexible para los elementos del banner*/
+    flex-direction: column; /*Uno abajo del otro*/
+    gap: var(--spacing20); /*separación entre los elementos del banner*/
+    align-items: start; /*sobreescribo la propiedad ALIGN-ITEMS: STREETCH de flex con direction: columns*/
+    z-index: 2; /*Lo ubico en el eje Z*/
+    position: relative; /*Necesario*/
+}
+
+.hero__title { /*elemento TITULO del banner*/
+    font-family: var(--alternative-font);
+    font-size: var(--font-jumbo);
+    color: var(--light-font-solid);
+}
+
+.hero__text { /*elemento TEXTO del banner*/
+    font-family: var(--alternative-font);
+    font-size: var(--font-medium);
+    color: var(--light-font-solid);
+}
+
+.hero__link { /*BOTON (enlace) del banner*/
+    display: inline-block; /*Para que tome todos los margins, padding, widths, etc...*/
+    font-size: var(--font-medium);
+    background-color: var(--light-bg-solid);
+    padding: var(--spacing12) var(--spacing68); /*12px arriba y abajo ** 68 der. e izq.*/
+    border-radius: 50px; /*Redondeado del botón*/
+    font-weight: 500; /*Letras medianamente gruesas*/
+    transition: all 0.3s ease-in-out; /*ALL para que afecte al BACKGROUND y al COLOR del HOVER*/
+}
+
+.hero__link:hover {
+    background-color: var(--primary-900);
+    color: var(--light-font-solid);
+}
