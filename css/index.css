@@ -151,6 +151,7 @@ header {
     display: none; /*Nunca se ve.  Sólo cuando se hace HOVER al padre*/
     position: absolute; /*Lo saco del flujo de la página*/
     background-color: var(--dark-bg-solid);
+    z-index: 2; /*Para que el blureo del BANNER no me lo tape*/
 }
 
 .submenu__link {
@@ -224,3 +225,54 @@ header {
     background-color: var(--primary-900);
     color: var(--light-font-solid);
 }
+
+/*COLLECTIONS*/
+
+.collection {
+/*  display: flex; /*Voy a tener 2 hijos, la foto y el texto, ubicados uno al lado del otro. Puedo usar FLEX, pero me conviene usar GRID, porque me permite dividir EXACTAMENTE en 2 mitades, más allá del texto que tenga cada colección*/
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); /*Hago 2 columnas iguales*/
+    align-items: center; /*Centro el contenido de cada columna*/
+}
+
+.collection:nth-child(even) .collection__cover { /*Seleccionamos las imágenes (COVER) de las COLLECTION pares sólamente*/
+    order: -1; /*Y le intercambiamos el orden de la imagen (COVER) con el texto*/
+}
+
+.collection__content {
+    display: flex;
+    flex-direction: column; /*Los textos de la colección van a estar encolumnados*/
+    gap: var(--spacing24);
+    align-items: start; /*Para que los hijos no sean STRETCH (width maximo)*/
+}
+
+.collection__title{
+    font-family: var(--alternative-font);
+    font-size: var(--font-display);
+    font-weight: 500; /*Letras de grosor intermedio (100-900)*/
+}
+
+.collection__text{
+    font-family: var(--alternative-font);
+    font-size: var(--font-large);
+    font-weight: 300; /*Letras de grosor un poco más fino*/
+    border-bottom: 2px solid var(--primary-solid); /*Truco para dibujar una línea roja al final del texto (ocupará TODO el ancho de su contenedor*/
+    padding-bottom: var(--spacing20); /*Para que la línea roja no me quede tan junta al texto*/
+}
+
+.collection__link { /*El botón*/
+    display: inline-block; /*Como es un enlace (et. en línea), lo hago para poder ajustar width, etc. */
+    font-size: var(--font-medium);
+    background-color: var(--dark-bg-solid); /*Fondo del botón*/
+    color: var(--light-font-solid); /*Color del texto del botón*/
+    padding: var(--spacing16) var(--spacing36); /*Relleno del botón*/
+    border-radius: 50px; /*Bordes redondeados del boton*/   
+    font-weight: 500; /*Letras medianamente gruesas*/
+    transition: background 0.3s ease-in-out; /*ALL para que afecte al BACKGROUND y al COLOR del HOVER*/
+}
+
+.collection__link:hover{
+    background-color: var(--primary-900);
+    color: var(--light-font-solid);
+}
+
