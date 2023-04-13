@@ -233,6 +233,7 @@ header {
     display: grid; 
     grid-template-columns: repeat(2, 1fr); /*Hago 2 columnas iguales*/
     align-items: center; /*Centro el contenido de cada columna*/
+    padding: var(--spacing16) 0; /*Separo los elementos de los bordes*/
 }
 
 .collection:nth-child(even) .collection__cover { /*Seleccionamos las imágenes (COVER) de las COLLECTION pares sólamente*/
@@ -276,3 +277,95 @@ header {
     color: var(--light-font-solid);
 }
 
+/*SLIDER*/
+
+.slider {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing36);
+    margin: var(--spacing68) auto; /*Separo el SLIDER de las colecciones y del FOOTER*/
+}
+
+.slider__title{
+    font-family: var(--alternative-font);
+    font-size: var(--font-display);
+    text-transform: uppercase; /*Lo paso a mayúsculas*/
+}
+
+.slider__items {
+    display: flex; /*Alinea los elementos no al lado del otro*/
+    gap: var(--spacing24); /*Separo las tarjetas entre sí*/
+}
+
+.card-item {
+    
+}
+
+.card-item__cover {
+    display: flex; /*Pone FRONT y BACK una al lado de la otra, momentáneamente*/
+    /*Si no lo pongo, puede pegar pequeños SALTITOS al hacer hover*/
+    position: relative; /*Para que cuando le ponga ABSOLUTE right al cartelito rojo "NUEVO"...*/
+}   /*sea relativo a su contenedor (este) y NO al Body*/
+
+.card-item__tag { /*Cartelito rojo de cada tarjeta, que dice "NUEVO"*/
+    font-size: var(--font-xsmall);
+    text-transform: uppercase;
+    background-color: var(--primary-solid); /*FONDO ROJO*/
+    color: var(--light-font-solid); /*Letras BLANCAS*/
+    padding: var(--spacing8) var(--spacing12); /*Relleno del cartelito NUEVO*/
+    position: absolute;
+    right: 0;
+}
+
+.card-item__cover img { /*Selecciono tanto la imagen [FRONT] como la [BACK]*/
+    animation: fade .7s; /*fade es mi animación, que definí más abajo*/
+}
+
+.card-item__img-back { /*Mientras yo no haga HOVER sobre el elemento PICTURE...*/
+    display: none; /*... la mantengo oculta*/
+}
+
+.card-item__cover:hover .card-item__img-back { /*Cuando hago HOVER en la PICTURE*/
+    display: block; /*muestro la imagen [BACK] */
+}
+
+.card-item__cover:hover .card-item__img-front { /*Cuando hago HOVER en la PICTURE*/
+    display: none; /* escondo la imagen [FRONT]*/
+}
+
+.card-item__content{ /*Cada tarjeta (es un contenedor)*/
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing12);
+    padding: var(--spacing16); /*Para que los elementos se separen de los bordes*/
+}
+
+.card-item__license {
+    font-size: var(--font-xsmall);
+    font-weight: 500; /*Medianamente gruesa*/
+}
+
+.card-item__name {
+    font-size: var(--font-medium);
+    font-weight: 700; /*Más gruesita*/
+}
+
+.card-item__price {
+    font-size: var(--font-small);
+}
+
+.card-item__promo {
+    font-size: var(--font-xsmall);
+    color: var(--secondary-solid);
+    font-weight: 700; /*Más gruesita*/
+}
+
+@keyframes fade { /*Animación que se activa cuando cambia de imagen [FRONT] a [BACK]*/
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
