@@ -283,7 +283,7 @@ header {
     display: flex;
     flex-direction: column;
     gap: var(--spacing36);
-    margin: var(--spacing68) auto; /*Separo el SLIDER de las colecciones y del FOOTER*/
+    margin: var(--spacing68) auto; /*Separo el SLIDER de las colecciones y del FOOTER, respetando los 1200px de la clase container*/
 }
 
 .slider__title{
@@ -359,6 +359,20 @@ header {
     color: var(--secondary-solid);
     font-weight: 700; /*Más gruesita*/
 }
+
+/*FOOTER*/
+.footer {
+    background-color: var(--dark-bg-solid);
+    padding: var(--spacing68);
+}
+
+.footer__copy {
+    margin-top: var(--spacing36); /*Separo el COPYRIGTH del MENU del FOOTER*/
+    text-align: center; /*Centro el texto del Copyrigth*/
+}
+
+
+/*ANIMATIOS*/
 
 @keyframes fade { /*Animación que se activa cuando cambia de imagen [FRONT] a [BACK]*/
     0% {
